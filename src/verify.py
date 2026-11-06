@@ -10,7 +10,7 @@ from pypdf import PdfReader
 
 root=Path(__file__).resolve().parents[1]
 summary=json.loads((root/'validation/summary.json').read_text(encoding='utf-8'))
-book=root/'outputs/wildberries/Wildberries_аналитика.xlsx'
+book=root/'outputs/01/01_аналитика.xlsx'
 v=openpyxl.load_workbook(book,data_only=True)
 f=openpyxl.load_workbook(book,data_only=False)
 checks={}
@@ -43,7 +43,7 @@ with zipfile.ZipFile(book) as z:
     assert not any(x.startswith('xl/externalLinks/') for x in z.namelist())
     charts_xml='\n'.join(z.read(x).decode('utf-8') for x in chartfiles).upper()
     assert '853CC6' in charts_xml and 'E34C96' in charts_xml
-pdf=root/'outputs/wildberries/Wildberries_отчёт.pdf'
+pdf=root/'outputs/01/01_отчёт.pdf'
 reader=PdfReader(pdf)
 assert len(reader.pages)==3
 assert all(len(p.extract_text())>300 for p in reader.pages)

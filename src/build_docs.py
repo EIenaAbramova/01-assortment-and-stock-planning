@@ -25,7 +25,7 @@ def markdown_table(frame,cols):
         lines.append('| '+' | '.join(str(row[c]) for c in cols)+' |')
     return '\n'.join(lines)
 
-notes=f'''# Конспект выполнения тестового задания Wildberries
+notes=f'''# Конспект выполнения тестового задания 01
 
 Дата подготовки: 16 октября 2026 года. Период данных: июнь 2024 - апрель 2025. Прогноз: май 2025.
 
@@ -35,7 +35,7 @@ notes=f'''# Конспект выполнения тестового задан�
 
 ## 2. Какие материалы проверил
 
-Нашёл 11 оригинальных файлов в `Аналитика (2)` и их копии в ранее подготовленной папке `Wildberries_копия`. Просмотрел описание прежней работы и структуру `Аналитика_excel.xlsx`: там уже были наработки по ETL, ABC и прогнозу. Прежние файлы не менял и не выдаю их за новый результат. Новое решение независимо пересчитано из исходных месячных выгрузок. PBIX/PBIT не обновлялись, поскольку задание разрешает Excel.
+Нашёл 11 оригинальных файлов в `Аналитика (2)` и их копии в ранее подготовленной папке `01_копия`. Просмотрел описание прежней работы и структуру `Аналитика_excel.xlsx`: там уже были наработки по ETL, ABC и прогнозу. Прежние файлы не менял и не выдаю их за новый результат. Новое решение независимо пересчитано из исходных месячных выгрузок. PBIX/PBIT не обновлялись, поскольку задание разрешает Excel.
 
 Создал папку `Решение` с кодом, таблицами, документацией и готовыми файлами. В `data/raw` сохранены исходники для воспроизводимости. Их SHA-256 и число строк записаны в `data/manifest.json`.
 
@@ -176,17 +176,17 @@ write('docs/Глоссарий.md',f'''# Глоссарий метрик
 pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))
 pdfmetrics.registerFont(TTFont('ArialBold','C:/Windows/Fonts/arialbd.ttf'))
 pdfmetrics.registerFontFamily('Arial',normal='Arial',bold='ArialBold')
-OUT=ROOT/'outputs'/'wildberries';OUT.mkdir(parents=True,exist_ok=True)
-pdf=OUT/'Wildberries_отчёт.pdf'
+OUT=ROOT/'outputs'/'01';OUT.mkdir(parents=True,exist_ok=True)
+pdf=OUT/'01_отчёт.pdf'
 c=canvas.Canvas(str(pdf),pagesize=A4);W,H=A4
-c.setTitle('Wildberries: ассортимент, прогноз и запасы')
+c.setTitle('01: ассортимент, прогноз и запасы')
 purple=colors.HexColor('#853CC6');dark=colors.HexColor('#40215C')
 style=ParagraphStyle('body',fontName='Arial',fontSize=10,leading=14,textColor=colors.HexColor('#282333'))
 def para(text,y,size=10,bold=False):
     st=ParagraphStyle('p',parent=style,fontSize=size,leading=size*1.4,fontName='ArialBold' if bold else 'Arial')
     p=Paragraph(text,st);_,h=p.wrap(W-84,H);p.drawOn(c,42,y-h);return y-h-9
 def header(page,title):
-    c.setFillColor(dark);c.setFont('ArialBold',17);c.drawString(42,H-48,'Wildberries')
+    c.setFillColor(dark);c.setFont('ArialBold',17);c.drawString(42,H-48,'01')
     c.setFillColor(colors.HexColor('#66606C'));c.setFont('Arial',9);c.drawRightString(W-42,H-46,f'{page} / 3')
     c.setStrokeColor(purple);c.line(42,H-61,W-42,H-61)
     return para(title,H-78,14,True)

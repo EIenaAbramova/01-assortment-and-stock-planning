@@ -76,7 +76,7 @@ st.getRange('L5:L24').conditionalFormats.add('cellIs',{operator:'greaterThan',fo
 const d=sheets['Дашборд'];d.showGridLines=false;d.tabColor=navy;
 d.getRange('A1:N60').format.font={name:'Arial',size:10,color:'#252334'};
 d.getRange('A1:A60').format.columnWidth=31;d.getRange('B1:B60').format.columnWidth=18;d.getRange('C1:C60').format.columnWidth=19;d.getRange('D1:D60').format.columnWidth=18;d.getRange('E1:N60').format.columnWidth=11;
-d.getRange('A2').values=[['Wildberries: ассортимент и спрос']];d.getRange('A2').format.font={name:'Arial',size:15,color:navy,bold:true};
+d.getRange('A2').values=[['01: ассортимент и спрос']];d.getRange('A2').format.font={name:'Arial',size:15,color:navy,bold:true};
 d.getRange('A3').values=[['Апрель 2025. Прогноз на май 2025. Выручка = сумма выкупов до комиссий и расходов.']];
 d.getRange('A5:C5').values=[['Метрика','Март 2025','Апрель 2025']];
 d.getRange('A6:A12').values=[['Выкупы, ₽'],['Заказы, шт'],['Переходы, шт'],['Конверсия'],['Остаток, шт'],['WAPE MA2 (9 тестов)'],['WAPE наивного (9 тестов)']];
@@ -114,10 +114,10 @@ console.log(JSON.stringify(checks));console.log(errors.ndjson);
 const old=source.getRange('F5').values[0][0];source.getRange('F5').values=[[old+100]];
 if(f.getRange('E5').values[0][0]!==payload.summary.top20[0].forecast+50)throw Error('Forecast did not react');
 source.getRange('F5').values=[[old]];wb.recalculate();
-const out=path.join(root,'outputs','wildberries');await fs.mkdir(out,{recursive:true});
+const out=path.join(root,'outputs','01');await fs.mkdir(out,{recursive:true});
 for(const [name,range,file] of [['Дашборд','A1:N46','dashboard'],['Ассортимент','A1:F16','assortment'],['Прогноз TOP10','A1:F22','forecast'],['Запасы TOP20','A1:F15','stock'],['История','A1:G16','history'],['Проверка прогноза','K4:M15','backtest'],['Данные','A1:G15','source']]){
   const preview=await wb.render({sheetName:name,range,scale:1.5,format:'png'});
   await fs.writeFile(path.join(root,'validation',`${file}.png`),new Uint8Array(await preview.arrayBuffer()));
 }
-await (await SpreadsheetFile.exportXlsx(wb)).save(path.join(out,'Wildberries_аналитика.xlsx'));
+await (await SpreadsheetFile.exportXlsx(wb)).save(path.join(out,'01_аналитика.xlsx'));
 console.log('Excel exported');
